@@ -15,11 +15,6 @@ public class GiftCardFacade {
     public static final String InvalidMerchant = "InvalidMerchant";
     public static final String InvalidToken = "InvalidToken";
 
-    // Paso esto a persistencia
-//    private Map<String, String> users;
-//    private Map<String,GiftCard> cards;
-//    private List<String>  merchants;
-//    private Clock clock;
 
     @Autowired private UserService userService;
     @Autowired private GiftCardService giftCardService;
@@ -28,13 +23,6 @@ public class GiftCardFacade {
 
     //Esto si queda en memoria porque la sesiones son temporales
     private Map<UUID, UserSession> sessions = new HashMap();
-
-//    public GiftCardFacade(List<GiftCard> cards, Map<String, String> users, List<String> merchants, Clock clock ) {
-//        this.cards = cards.stream().collect( Collectors.toMap( each -> each.id(), each -> each ));
-//        this.users = users;
-//        this.merchants = merchants;
-//        this.clock = clock;
-//    }
 
     public UUID login( String userKey, String pass ) {
         if ( !userService.authenticate(userKey, pass)) {

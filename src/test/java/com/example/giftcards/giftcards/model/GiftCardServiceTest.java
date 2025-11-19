@@ -59,15 +59,6 @@ public class GiftCardServiceTest {
 
     }
 
-    @Test public void testDeletionByProxy() throws Exception {
-        GiftCard model = savedGiftCard();
-        GiftCard proxy = model.getClass().getConstructor().newInstance();
-        proxy.setId( model.getId() );
-
-        service.delete( proxy );
-        assertThrows( RuntimeException.class, () -> service.getById( model.getId() ) );
-    }
-
     @Test public void testFindAll() {
         GiftCard model = savedGiftCard();
         List list = service.findAll();

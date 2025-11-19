@@ -25,4 +25,10 @@ public class MerchantService {
     public boolean exists(String code) {
         return repository.existsById(code);
     }
+
+    @Transactional
+    public void delete(Merchant merchant) {
+        repository.delete(merchant);
+    }
+
 }

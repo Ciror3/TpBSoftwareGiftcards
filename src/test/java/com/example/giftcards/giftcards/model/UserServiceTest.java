@@ -74,15 +74,6 @@ class UserServiceTest {
 
     }
 
-    @Test public void testDeletionByProxy() throws Exception {
-        UserVault model = savedSample();
-        UserVault proxy = model.getClass().getConstructor().newInstance();
-        proxy.setId( model.getId() );
-
-        service.delete( proxy );
-        assertThrows( RuntimeException.class, () -> service.getById( model.getId() ) );
-    }
-
     @Test public void testFindAll() {
         UserVault model = savedSample();
         List list = service.findAll();

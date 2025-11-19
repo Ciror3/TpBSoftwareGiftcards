@@ -1,43 +1,24 @@
 package com.example.giftcards.giftcards.controller;
 
-
-
-
-import com.example.giftcards.giftcards.model.Clock;
 import com.example.giftcards.giftcards.model.GiftCardFacade;
-import com.example.giftcards.giftcards.model.GiftCard;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
+@RequestMapping("api/giftcards")
 public class GiftcardsController {
-    //    POST /api/giftcards/login?user=aUser&pass=aPassword
-//    Devuelve un token válido
-//    private GiftCardFacade giftcardsSystemFacade = newFacade();
-//
-//    private static GiftCardFacade newFacade() {
-//        return newFacade(new Clock());
-//    }
-//    public static GiftCardFacade newFacade(Clock clock){
-//        return new GiftCardFacade(
-//                new ArrayList<>(List.of(new GiftCard("GC1",10))),
-//                new HashMap<>(Map.of("Johnny","jojo")),
-//                new ArrayList<>(List.of("M1")),
-//                clock
-//        );
-//    }
-
     @Autowired private GiftCardFacade giftcardsSystemFacade;
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleIlegalArguments(RuntimeException ex) {
         return ResponseEntity.internalServerError().body(ex.getMessage());
     }
+
+    //    POST /api/giftcards/login?user=aUser&pass=aPassword
+    //    Devuelve un token válido
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestParam String user, @RequestParam String pass ) {
