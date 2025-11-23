@@ -3,6 +3,7 @@ package com.example.giftcards.giftcards.model;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DataJpaTest
+@SpringBootTest
 @Import(GiftCardService.class)
 public class GiftCardServiceTest extends ModelServiceTest<GiftCard, String, GiftCardService> {
 

@@ -24,10 +24,8 @@ public class GiftCard extends ModelEntity<String> {
     @JoinColumn(name = "user_id")
     private UserVault owner;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "giftcard_charges", joinColumns = @JoinColumn(name = "card_id"))
-    @Column(name = "charges_description")
-    private List<String> charges = new ArrayList<>();
+    @OneToMany(mappedBy = "giftCard", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Charges> charges = new ArrayList<>();
 
     protected GiftCard() {}
 
@@ -37,12 +35,10 @@ public class GiftCard extends ModelEntity<String> {
     }
 
     public GiftCard charge(int anAmount, String description) {
-        if (!owned() || (balance - anAmount < 0)) {
-            throw new RuntimeException(CargoImposible);
-        }
-
+        if (!owned() || (balance - anAmount < 0)) throw new RuntimeException(CargoImposible);
         balance = balance - anAmount;
-        charges.add(description);
+        Charges newCharge = new Charges(anAmount, description, this);
+        charges.add(newCharge);
 
         return this;
     }
@@ -72,7 +68,7 @@ public class GiftCard extends ModelEntity<String> {
         return balance;
     }
 
-    public List<String> charges() {
+    public List<Charges> charges() {
         return charges;
     }
 

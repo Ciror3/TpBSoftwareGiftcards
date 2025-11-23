@@ -55,7 +55,7 @@ public class GiftCardFacade {
         giftCardService.save(card);
     }
 
-    public List<String> details( UUID token, String cardId ) {
+    public List<Charges> details( UUID token, String cardId ) {
         return ownedCard( token, cardId ).charges();
     }
 

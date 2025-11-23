@@ -125,12 +125,12 @@ public class GiftCardFacadeTest {
         assertTrue( facade.details( token, CARD_GC1).isEmpty() );
     }
 
-    @Test public void userCanCheckHisCharges() {
+    @Test
+    public void userCanCheckHisCharges() {
         UUID token = facade.login(BOB_USER, BOB_PASS);
         facade.redeem( token, CARD_GC1);
         facade.charge(MERCHANT_M1, CARD_GC1, 2, "UnCargo" );
-
-        assertEquals( "UnCargo", facade.details( token, CARD_GC1).getLast() );
+        assertEquals( "UnCargo", facade.details( token, CARD_GC1).getLast().getDescription() );
     }
 
     @Test public void userCannotCheckOthersCharges() {

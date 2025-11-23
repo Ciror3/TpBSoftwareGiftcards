@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -51,18 +52,20 @@ class GiftcardsControllerTest {
     }
 
     @Test
+    @Commit
     void test01LoginCorrectly() throws Exception {
         String token = loginAndGetToken(user, password);
         assertDoesNotThrow(() -> UUID.fromString(token));
     }
 
-        @Test
+    @Test
     void test02LoginIncorrectPass() throws Exception {
         performLogin(user, "IncorrectPassword")
             .andExpect(status().is(500));
     }
 
     @Test
+    @Commit
     void test03RedeemCorrectly() throws Exception {
         String token = loginAndGetToken(user, password);
         performRedeem(CARD_ID, token)
